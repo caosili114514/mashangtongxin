@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>马上同心 · 文化信使 ｜ 昭陵六骏马文化溯源与边疆宣讲实践</title>
+<meta name="description" content="中央民族大学教育学院「马上同心·文化信使」社会实践团，依托故宫博物院与中央民族大学「同心共铸·神骏新传」青年文化共创计划，以昭陵六骏为文化载体，从故宫到边疆开展「三交史」宣讲、田野调研与融媒体传播。">
+<meta name="keywords" content="马上同心,文化信使,昭陵六骏,铸牢中华民族共同体意识,故宫博物院,中央民族大学,三交史,文化两创,张家川">
+<meta name="author" content="马上同心社会实践团">
+<meta name="theme-color" content="#9e2b25">
+<meta property="og:type" content="website">
+<meta property="og:title" content="马上同心 · 文化信使 ｜ 昭陵六骏马文化溯源与边疆宣讲实践">
+<meta property="og:description" content="千年石刻，如何与当代对话。以露、月、云、光、电、火六种自然元素，重述六匹战马背后的民族交往交流交融史。">
+<meta property="og:image" content="assets/img/hero-keyvisual-1200.webp">
+<link rel="icon" href="assets/img/emblem.webp">
+<link rel="preload" as="image" href="assets/img/hero-keyvisual.webp"
+      imagesrcset="assets/img/hero-keyvisual-1200.webp 1200w, assets/img/hero-keyvisual-1600.webp 1600w, assets/img/hero-keyvisual.webp 2400w"
+      imagesizes="100vw">
+<link rel="stylesheet" href="assets/css/style.css?v=20261022b">
+<link rel="stylesheet" href="assets/css/enhancements.css?v=20261022c">
+</head>
+<body>
+
+<!-- ==================== 进场封面（背景音乐入口） ====================
+     浏览器规定：没有用户手势就不允许带声音播放。所以用一道封面接住
+     用户的第一次点击——那次点击既是「进入」，也是启动音乐的合法手势。
+     不用 JS 时（noscript）封面自动隐藏，不会挡住内容。 -->
+<div class="gate" id="gate">
+  <div class="gate__bg"><img src="assets/img/hero-keyvisual-1200.webp" alt=""></div>
+  <div class="gate__inner">
+    <img class="gate__seal" src="assets/img/emblem.webp" alt="">
+    <h2 class="gate__title">马上同心</h2>
+    <p class="gate__sub">同心共铸 · 神骏新传</p>
+    <button class="gate__btn" id="gateEnter" type="button">
+      <span class="gate__ico" aria-hidden="true">♪</span><span>点击进入</span>
+    </button>
+    <p class="gate__note">进入后将播放背景音乐《古道尘远》</p>
+  </div>
+</div>
+<script>
+/* 跳过进场封面的判定，必须放在封面标记之后、main.js 之前同步执行，否则会闪一下。
+   两种情形跳过：
+     ① 本次会话已经进过站（例如从站内小游戏返回、或按浏览器后退回来）；
+     ② 链接显式带了 ?skipgate=1（站内小游戏的「返回」按钮就走这条）。
+   封面原本只是为了接住「第一次用户手势」来放背景音乐，而 main.js 第 440 行起
+   另有一套「首次交互自动起播」的兜底，所以跳过封面不会导致音乐丢失。 */
+(function () {
+  var skip = false;
+  try { skip = sessionStorage.getItem('mstx-entered') === '1'; } catch (e) {}
+  if (/[?&]skipgate=1/.test(location.search)) skip = true;
+  if (!skip) return;
+  window.__mstxSkipGate = true;
+  var g = document.getElementById('gate');
+  if (g && g.parentNode) g.parentNode.removeChild(g);
+})();
+</script>
+<noscript><style>.gate{display:none !important}</style></noscript>
+<script>
+/* 保险丝：仅当主脚本确实没跑起来（未置 __mstxReady）时才放行，
+   避免「用户还没点、封面就自己消失」。 */
+setTimeout(function () {
+  var g = document.getElementById('gate');
+  if (g && !window.__mstxReady && !g.dataset.handled) {
+    g.classList.add('is-out');
+    document.body.classList.remove('is-locked');
+  }
+}, 5000);
+</script>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ==================== 导航 ==================== -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#top" aria-label="马上同心社会实践团 · 文化信使">
+      <!-- 横向锁定图本身已含「马上同心社会实践团」字样，故不再重复旁边的品牌文字 -->
+      <img src="assets/img/nav-logo.png" alt="马上同心社会实践团" width="221" height="36" style="width:auto;height:36px;border-radius:0;box-shadow:none">
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="主导航">
+      <a href="#top">首页</a>
+      <a href="#overview">内容概览</a>
+      <a href="#team">团队概览</a>
+      <a href="#background">实践背景</a>
+      <a href="#culture">文化溯源</a>
+      <a href="#achievement">成果展示</a>
+      <a href="#outlook">总结展望</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="展开导航菜单" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== 首屏 ==================== -->
+<section class="hero" id="top">
+  <div class="hero__bg">
+    <img src="assets/img/hero-keyvisual.webp"
+         srcset="assets/img/hero-keyvisual-1200.webp 1200w, assets/img/hero-keyvisual-1600.webp 1600w, assets/img/hero-keyvisual.webp 2400w"
+         sizes="100vw"
+         alt="「马上同心」主视觉：祥云缭绕的故宫宫殿群与昭陵六骏剪影，四角为「马上同心」四个榜书大字，中央为中央民族大学与故宫博物院院徽及「同心共铸·神骏新传」题词。"
+         fetchpriority="high" width="2400" height="1350">
+  </div>
+  <!-- 主视觉已把标题与题词绘入画面，此处保留一份真实文本供搜索引擎与读屏软件识别 -->
+  <h1 class="sr-only">马上同心 · 文化信使 — 昭陵六骏马文化溯源与边疆宣讲实践</h1>
+  <a class="hero__scroll" href="#overview" aria-label="向下滚动，查看内容概览"><i aria-hidden="true"></i><span>展卷</span></a>
+</section>
+
+<!-- ==================== 内容概览 ==================== -->
+<section class="section section--tint" id="overview">
+  <div class="container">
+    <div class="section__head" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <h2 class="section__title">内容<em>概览</em></h2>
+      <p class="section__lead">翻转六骏卡片，正面是千年石刻，背面是二创形象与名字；再沿一条自东向西的红色飘带重走实践路线，从北京出发，读懂这次文化信使的千里之行。</p>
+    </div>
+
+    <h3 style="font-size:21px;margin-bottom:16px" data-reveal>六骏翻转卡 <span style="font-size:14px;color:var(--ink-3);font-weight:400">· 点击卡片翻转——正面石刻形象，背面二创与名字</span></h3>
+    <div class="flip-cards" data-reveal>
+      <div class="flip-card" data-sound="telebiao" role="button" tabindex="0" aria-label="翻转查看特勒骠">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="assets/img/stone-telebiao.webp" alt="特勒骠唐宋石刻原图" loading="lazy"><p>特勒骠 · 石刻</p></div>
+          <div class="flip-back"><img src="assets/img/horses/telebiao.webp" alt="特勒骠二创形象" loading="lazy"><h4>特勒骠</h4><p>光 · 炽热<br>共同精神 · 守望</p></div>
+        </div>
+      </div>
+      <div class="flip-card" data-sound="qingzhui" role="button" tabindex="0" aria-label="翻转查看青骓">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="assets/img/stone-qingzhui.webp" alt="青骓唐宋石刻原图" loading="lazy"><p>青骓 · 石刻</p></div>
+          <div class="flip-back"><img src="assets/img/horses/qingzhui.webp" alt="青骓二创形象" loading="lazy"><h4>青骓</h4><p>电 · 爆发<br>共同精神 · 和睦</p></div>
+        </div>
+      </div>
+      <div class="flip-card" data-sound="shifachi" role="button" tabindex="0" aria-label="翻转查看什伐赤">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="assets/img/stone-shifachi.webp" alt="什伐赤唐宋石刻原图" loading="lazy"><p>什伐赤 · 石刻</p></div>
+          <div class="flip-back"><img src="assets/img/horses/shifachi.webp" alt="什伐赤二创形象" loading="lazy"><h4>什伐赤</h4><p>火 · 威猛<br>共同精神 · 奋进</p></div>
+        </div>
+      </div>
+      <div class="flip-card" data-sound="sa-luzi" role="button" tabindex="0" aria-label="翻转查看飒露紫">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="assets/img/stone-saluzi.webp" alt="飒露紫唐宋石刻原图" loading="lazy"><p>飒露紫 · 石刻</p></div>
+          <div class="flip-back"><img src="assets/img/horses/sa-luzi.webp" alt="飒露紫二创形象" loading="lazy"><h4>飒露紫</h4><p>露 · 灵动<br>共同精神 · 同心</p></div>
+        </div>
+      </div>
+      <div class="flip-card" data-sound="quanmaogua" role="button" tabindex="0" aria-label="翻转查看拳毛騧">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="assets/img/stone-quanmaogua.webp" alt="拳毛騧唐宋石刻原图" loading="lazy"><p>拳毛騧 · 石刻</p></div>
+          <div class="flip-back"><img src="assets/img/horses/quanmaogua.webp" alt="拳毛騧二创形象" loading="lazy"><h4>拳毛騧</h4><p>月 · 清冷<br>共同精神 · 聚力</p></div>
+        </div>
+      </div>
+      <div class="flip-card" data-sound="baitiwu" role="button" tabindex="0" aria-label="翻转查看白蹄乌">
+        <div class="flip-inner">
+          <div class="flip-front"><img src="assets/img/stone-baitiwu.webp" alt="白蹄乌唐宋石刻原图" loading="lazy"><p>白蹄乌 · 石刻</p></div>
+          <div class="flip-back"><img src="assets/img/horses/baitiwu.webp" alt="白蹄乌二创形象" loading="lazy"><h4>白蹄乌</h4><p>云 · 迅疾<br>共同精神 · 兴旺</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="route-heading-row" data-reveal>
+      <h3 class="inline-title">实践路线交互地图</h3>
+      <p class="inline-hint">一条红色飘带，自东向西穿起四站。点击任一站点，查看时间、地点与「三交史」线索。</p>
+    </div>
+    <div class="ribbon-map" data-route-map data-route-caption="北京 → 西安 → 甘肃张家川" data-reveal>
+      <noscript><p class="ribbon-map__fallback">实践路线：北京中央民族大学 → 故宫博物院 → 西安碑林博物馆 → 甘肃张家川。</p></noscript>
+    </div>
+
+    <h3 style="font-size:21px;margin:clamp(34px,4vw,50px) 0 16px" data-reveal>数据展示 <span style="font-size:14px;color:var(--ink-3);font-weight:400">· 数字随滚动跳动</span></h3>
+    <div class="data-bar" data-reveal>
+      <div class="data-item">
+        <svg class="data-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="9" cy="9" r="1.4"/></svg>
+        <div><span class="data-num" data-target="12">0</span><span class="data-unit">幅</span></div>
+        <p>六骏 IP 设计图</p>
+      </div>
+      <div class="data-item">
+        <svg class="data-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <div><span class="data-num" data-target="56">0</span><span class="data-unit">份</span></div>
+        <p>收集青少年书信反馈</p>
+      </div>
+      <div class="data-item">
+        <svg class="data-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M3.5 19c.6-3 2.9-5 5.5-5s4.9 2 5.5 5M14.5 19c.4-2.2 1.6-3.6 3-3.6 1.3 0 2.5 1.2 3 3.6"/></svg>
+        <div><span class="data-num" data-target="500">0</span><span class="data-unit">人次</span></div>
+        <p>宣讲活动参与</p>
+      </div>
+      <div class="data-item">
+        <svg class="data-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.4"/></svg>
+        <div><span class="data-num" data-target="8">0</span><span class="data-unit">集</span></div>
+        <p>系列微课</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 团队概览 ==================== -->
+<section class="section" id="team">
+  <div class="container">
+    <div class="section__head" data-reveal>
+      <p class="eyebrow">Team Overview</p>
+      <h2 class="section__title">团队<em>概览</em></h2>
+      <p class="section__lead">一支以故宫马文化为学术起点、以铸牢中华民族共同体意识为核心理念的跨学科社会实践团队。</p>
+    </div>
+
+    <div class="team-intro">
+      <div class="prose prose--lead" data-reveal>
+        <p>「马上同心」实践团是一支以故宫马文化为学术起点、以铸牢中华民族共同体意识为核心理念的跨学科社会实践团队。团队依托中央民族大学教育学院与故宫博物院的馆校合作平台，以「文化信使」为身份锚点，深入边疆民族地区开展「三交史」宣讲、田野调研与融媒体传播，用青年话语讲好中华民族「马背上的交往交流交融」故事。</p>
+        <p>团队共 <strong>9 名成员</strong>，覆盖教育学、社会学、文学等专业，由<strong>许丽英、杨雨璇</strong>两位老师担任指导工作，分设<strong>统筹学术、技术设计、新媒体宣传、在地协调</strong>四大组别，分工完整、专业互补。团队部分成员深度参与故宫「神骏」特展青年共创项目，斩获科普宣讲、文创创作多项赛事奖项，具备文博宣讲、田野调研、视频制作、新媒体运营全流程实操能力。</p>
+      </div>
+      <figure class="team-banner" data-reveal>
+        <img src="assets/img/team-group-hd.webp" width="3104" height="1328" alt="马上同心实践团在实践地与当地儿童合影，队旗书写「中央民族大学马上同心社会实践团」">
+        <figcaption>实践团在实践地与当地儿童合影 · 完整横幅展示</figcaption>
+      </figure>
+    </div>
+
+    <p style="margin:0 0 clamp(28px,3.4vw,40px)" data-reveal>
+      <a class="btn btn--zhu" href="https://mp.weixin.qq.com/s/z6M5XC5jhcy2MxmnuKxa5w" target="_blank" rel="noopener">点击查看公众号团队介绍推文
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </p>
+
+    <div style="margin-top:clamp(40px,5vw,64px)" data-reveal>
+      <h3 style="font-size:21px;margin-bottom:8px">组织成员</h3>
+      <p style="color:var(--ink-3);font-size:15px;max-width:760px">九名成员，九张青年面孔——覆盖教育学、文学、社会学等专业，分设统筹学术、技术设计、新媒体宣传、在地协调四大组别。<strong style="color:var(--zhu);font-weight:600">点击成员卡片，查看个人介绍海报。</strong></p>
+      <div class="member-cards">
+        <button class="member-card" data-member="ma-xueyi" aria-haspopup="dialog"><img src="assets/img/members/ma-xueyi.webp" alt="马雪宜个人海报" loading="lazy"><span class="member-card__name">马雪宜</span></button>
+        <button class="member-card" data-member="luo-yixin" aria-haspopup="dialog"><img src="assets/img/members/luo-yixin.webp" alt="罗怡欣个人海报" loading="lazy"><span class="member-card__name">罗怡欣</span></button>
+        <button class="member-card" data-member="tian-lihan" aria-haspopup="dialog"><img src="assets/img/members/tian-lihan.webp" alt="田丽涵个人海报" loading="lazy"><span class="member-card__name">田丽涵</span></button>
+        <button class="member-card" data-member="li-shichao" aria-haspopup="dialog"><img src="assets/img/members/li-shichao.webp" alt="李世超个人海报" loading="lazy"><span class="member-card__name">李世超</span></button>
+        <button class="member-card" data-member="xu-mengyuan" aria-haspopup="dialog"><img src="assets/img/members/xu-mengyuan.webp" alt="徐梦媛个人海报" loading="lazy"><span class="member-card__name">徐梦媛</span></button>
+        <button class="member-card" data-member="li-muzi" aria-haspopup="dialog"><img src="assets/img/members/li-muzi.webp" alt="李木子个人海报" loading="lazy"><span class="member-card__name">李木子</span></button>
+        <button class="member-card" data-member="zou-yaning" aria-haspopup="dialog"><img src="assets/img/members/zou-yaning.webp" alt="邹亚宁个人海报" loading="lazy"><span class="member-card__name">邹亚宁</span></button>
+        <button class="member-card" data-member="zhang-nan" aria-haspopup="dialog"><img src="assets/img/members/zhang-nan.webp" alt="张楠个人海报" loading="lazy"><span class="member-card__name">张　楠</span></button>
+        <button class="member-card" data-member="zeng-lilin" aria-haspopup="dialog"><img src="assets/img/members/zeng-lilin.webp" alt="曾丽霖个人海报" loading="lazy"><span class="member-card__name">曾丽霖</span></button>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-3);margin-top:14px">指导教师：许丽英、杨雨璇</p>
+    </div>
+
+    <div style="margin-top:clamp(40px,5vw,64px)" data-reveal>
+      <h3 style="font-size:21px;margin-bottom:8px">团队荣誉</h3>
+      <p style="color:var(--ink-3);font-size:15px;max-width:640px;margin:0 0 24px">六项荣誉，六段并肩走过的路——从故宫的红墙到张家川的课堂。</p>
+
+      <div class="honors">
+        <figure class="honor honor--doc" data-full="assets/img/honor-01-outstanding.webp" data-cap="2026 年暑期社会实践常规项目团队入选「优秀团队」答辩名单。名单第二行「教育学院 · 赴甘肃省天水市张家川回族自治县调研昭陵六骏与中华民族交往交流交融史实践团」即本实践团。">
+          <img src="assets/img/honor-01-outstanding.webp" alt="2026 年暑期社会实践常规项目团队入选「优秀团队」答辩名单，第二行为教育学院赴甘肃省天水市张家川回族自治县调研昭陵六骏与中华民族交往交流交融史实践团" loading="lazy">
+          <figcaption><b>2026 年暑期社会实践常规项目</b><span>入选「优秀团队」答辩名单</span></figcaption>
+        </figure>
+        <figure class="honor honor--doc" data-full="assets/img/honor-02-training-camp.webp" data-cap="中央民族大学创新训练营获奖名单。本实践团组建的「紫禁寻踪·骏影留声」队获二等奖；「最新创意奖」由 25 级本科 1 班罗怡欣获得。">
+          <img src="assets/img/honor-02-training-camp.webp" alt="中央民族大学创新训练营获奖名单，本实践团组建的「紫禁寻踪·骏影留声」队获二等奖" loading="lazy">
+          <figcaption><b>中央民族大学创新训练营</b><span>二等奖 ·「紫禁寻踪 · 骏影留声」队</span></figcaption>
+        </figure>
+        <figure class="honor" data-full="assets/img/honor-05-gugong-study.webp" data-cap="实践团在故宫博物院展厅研学，于《昭陵六骏图》卷等马主题书画前驻足研读。">
+          <img src="assets/img/honor-05-gugong-study.webp" alt="实践团成员在故宫博物院展厅研读书画" loading="lazy">
+          <figcaption><b>故宫博物院研学</b><span>青年文化共创计划</span></figcaption>
+        </figure>
+        <figure class="honor" data-full="assets/img/honor-03-reading-cert.webp" data-cap="「墨韵书香话马韵，阅古寻根铸同心」读书创作大赛三等奖荣誉证书（证书编号 261032121029）。">
+          <img src="assets/img/honor-03-reading-cert.webp" alt="读书创作大赛三等奖荣誉证书" loading="lazy">
+          <figcaption><b>「墨韵书香话马韵，阅古寻根铸同心」</b><span>读书创作大赛三等奖</span></figcaption>
+        </figure>
+        <figure class="honor" data-full="assets/img/honor-04-speech-cert.webp" data-cap="2025-2026 学年春季学期中央民族大学教育学院「紫禁红韵·同心铸魂」演讲比赛一等奖荣誉证书。">
+          <img src="assets/img/honor-04-speech-cert.webp" alt="「紫禁红韵·同心铸魂」演讲比赛一等奖荣誉证书" loading="lazy">
+          <figcaption><b>「紫禁红韵 · 同心铸魂」</b><span>演讲比赛一等奖</span></figcaption>
+        </figure>
+        <figure class="honor" data-full="assets/img/honor-02-volunteer-cert.webp" data-cap="故宫博物院「来！听色彩讲故事」教育体验展志愿服务项目「十佳志愿者」荣誉证书，中央民族大学教育学院颁发（2026.05.23）。">
+          <img src="assets/img/honor-02-volunteer-cert.webp" alt="故宫博物院教育体验展「十佳志愿者」荣誉证书" loading="lazy">
+          <figcaption><b>十佳志愿者荣誉证书</b><span>中央民族大学教育学院 · 2026.05.23</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="quote" style="font-size:18px;margin:28px 0 0">马上同心深挖马文化，走遍边疆大地，讲透各民族马背交往交流交融故事。</div>
+    </div>
+
+    <div class="card card--logo" style="margin-top:22px;border-left:3px solid var(--jin);position:relative;overflow:hidden" data-reveal>
+      <canvas class="logo-particles" aria-hidden="true"></canvas>
+      <img src="assets/img/logo-wordmark.png" alt="马上同心社会实践团 Logo：朱红圆印中的白色骏马，右侧竖排「马上同心」四字" loading="lazy" width="168" height="182" style="width:clamp(150px,18%,200px);position:relative;z-index:1">
+      <div style="position:relative;z-index:1">
+        <h3 style="font-size:21px;margin-bottom:14px">团队 Logo</h3>
+        <p class="prose" style="margin:0">团队 Logo 以<strong>朱红方印</strong>为骨，主体白色骏马昂首腾跃，既接续故宫「昭陵六骏」的文物底蕴，又联结西北草原的游牧风情，凝练着跨越千年的民族交往交流交融史；马腹菱纹暗合「石榴同心」之喻，象征各族儿女紧密相拥。右侧「马上同心」四字点明实践内核，寓示民大学子策马扬鞭，从故宫走向边疆，以知行合一践行文化信使的笃行初心。</p>
+        <ul class="pill-list" style="margin-top:18px">
+          <li>宣讲</li><li>田野调研</li><li>新媒体原创内容</li><li>青年文化信使</li><li>守护民族团结文脉</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 实践背景 ==================== -->
+<section class="section section--tint" id="background">
+  <div class="container">
+    <div class="section__head" data-reveal>
+      <p class="eyebrow">Context</p>
+      <h2 class="section__title">实践<em>背景</em></h2>
+      <p class="section__lead">从国家战略到学校工程，从馆校共创到时代契机——四个层面共同托举起这次「文化信使」的出发。</p>
+    </div>
+
+    <div class="tabs" data-tabs data-reveal>
+      <div class="tabs__list" role="tablist" aria-label="实践背景分类">
+        <button class="tabs__btn" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false">时代契机 · 丙午马年</button>
+        <button class="tabs__btn" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false">时代背景 · 馆校共创</button>
+        <button class="tabs__btn" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false">团队与共创计划</button>
+        <button class="tabs__btn" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="true">宏观政策 · 铸牢主线</button>
+        <button class="tabs__btn" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false">学校层面 · 知行中华</button>
+      </div>
+
+      <div class="tabs__panel" id="panel-4" role="tabpanel" aria-labelledby="tab-4" tabindex="0">
+        <div class="horse-year-panel" aria-label="丙午马年主题插画作为文字面板底图">
+          <div class="horse-year-panel__inner">
+            <p class="eyebrow">2026 · 丙午马年</p>
+            <h3 class="horse-year-panel__title">丙午马年 · 策马扬鞭</h3>
+            <p>推动中华优秀传统文化<strong>创造性转化、创新性发展</strong>，是传承中华优秀传统文化的基本方针，也是建设社会主义文化强国的重要方针。</p>
+            <p>2026年恰逢农历<strong>丙午马年</strong>。习近平总书记在二〇二六年春节团拜会上以「策马扬鞭、勇往直前」寄语全国各族人民。故宫博物院围绕马年推出系列马文化主题展览与活动，本项目以故宫马文化为切入点，与这一时代语境深度契合。</p>
+            <blockquote>「丙午马年，希望全国各族人民更加紧密地团结在党中央周围……在中国式现代化新征程上策马扬鞭，勇往直前。」</blockquote>
+            <ul class="pill-list horse-year-panel__pills">
+              <li>文化「两创」</li><li>馆校共创</li><li>文化信使</li><li>边疆宣讲</li>
+            </ul>
+          </div>
+          <span class="horse-year-panel__credit">策马扬鞭 · 六骏新传</span>
+        </div>
+      </div>
+
+      <div class="tabs__panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+        <div class="split" style="grid-template-columns:1fr 1.2fr">
+          <div class="prose">
+            <p>2026年5月19日，由故宫博物院和中央民族大学合作开展的「同心共铸·神骏新传」青年文化共创计划，在故宫博物院举办阶段性成果展示。2026年以来，故宫博物院社会教育部和中央民族大学教育学院以青年文化共创计划为契机，开展了科普讲座、视频共创、艺术创作等丰富多彩的实践活动。</p>
+            <p>由社会教育部为青年学子带来的《百态神骏伴苍生》《大唐马政与丝路贡马史话》等主题讲座，系统介绍了故宫博物院收藏的「马」主题文物，以及由此展开的民族交往、交流、交融史的历史研究。活动现场双方启动了「文化信使」实践活动——在2026年暑假期间，民大学子将结合「知行中华」暑期社会实践，带着学习所得从故宫到祖国大地、从校园到辽阔边疆，开展以故宫「马」主题文物为核心的「三交史」宣讲，以此搭建文明互鉴、民族「三交」的青春桥梁，助力中华优秀传统文化创造性转化、创新性发展。</p>
+          </div>
+          <div class="card card--jin">
+            <h3 class="card__title">故宫「神骏」特展</h3>
+            <p class="card__text">「神骏：故宫书画艺术中的马世界」特展共展出与马相关的院藏珍贵书画，其中包括国家一级文物，并有 28 件为首次展出。</p>
+            <dl class="ministat">
+              <div><dt>院藏书画</dt><dd>55<sup>件</sup></dd></div>
+              <div><dt>国家一级文物</dt><dd>20<sup>件</sup></dd></div>
+              <div><dt>首次展出</dt><dd>28<sup>件</sup></dd></div>
+            </dl>
+            <p class="card__text" style="margin-top:14px">重点展品包括李公麟《摹韦偃牧放图》、金代赵霖《昭陵六骏图》、郎世宁《阚虎骝图》等历代画马名作。</p>
+            <p class="card__text" style="margin-top:12px;color:var(--zhu);font-weight:600">本项目以「昭陵六骏」为核心载体，正是对馆校合作成果的深化与延伸。</p>
+            <p style="margin:18px 0 0">
+              <a class="btn btn--line btn--sm" href="https://www.neac.gov.cn/seac/xwzx/202605/1190356.shtml" target="_blank" rel="noopener">点击查看故宫 × 中央民族大学「青年文化共创计划」详情
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs__panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
+        <div class="split">
+          <div class="prose">
+            <p>本团队核心成员深度参与了「同心共铸·神骏新传」青年文化共创计划的全过程。在故宫社教部老师的指导下，团队系统学习了故宫马主题文物的历史脉络与三交史叙事框架。在「神骏：故宫书画艺术中的马世界」特展期间，即 <strong>2026年4月22日至6月21日</strong>，团队开展了系列实践。</p>
+            <p>基于共创计划的学习所得，团队积累了丰硕的前期成果：2026年寒假社会实践校级优秀团队、故宫志愿十佳志愿者、「墨韵书香话马韵，阅古寻根铸同心」读书创作大赛三等奖、「紫禁红韵·同心铸魂」演讲比赛一等奖、创新训练营二等奖，并自主开发了阙虎骝 Ren'Py 互动小游戏。</p>
+            <p>这段经历让团队形成清晰的问题意识：故宫文物里藏着大量可被翻译给当代年轻人听的故事，而这些故事<strong>最应讲给边疆孩子听</strong>，因为那些文物里恰好记录着中华各民族交往交流交融的历史。文化信使计划的启动，为团队提供了将这一想法落地的官方通道。</p>
+          </div>
+          <figure class="split__media">
+            <img src="assets/img/honor-02b-gugong-service.webp" alt="实践团成员在故宫博物院「来！听色彩讲故事」教育体验展志愿服务岗" loading="lazy">
+            <figcaption style="font-size:13px;color:var(--ink-3)">团队在故宫博物院社会教育部指导下开展系列实践——从展柜前的研读，到教育体验展服务岗上的讲述。</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="tabs__panel is-active" id="panel-3" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
+        <div class="prose background-intro">
+          <p><strong>铸牢中华民族共同体意识</strong>，是新时代党的民族工作的主线，也是新时代民族地区各项工作的主线。2021年中央民族工作会议明确「必须以铸牢中华民族共同体意识为新时代党的民族工作的主线」；2024年全国民族团结进步表彰大会进一步强调，要推动各民族坚定对伟大祖国、中华民族、中华文化、中国共产党、中国特色社会主义的高度认同。</p>
+          <p>在甘肃，这条主线正被落实为一个个具体场景：从河西走廊到陇东南，从博物馆展陈到青少年课堂，从互嵌式社区到文旅融合线路。本项目走进张家川回族自治县，正是把宏大的共同体叙事，转化为青少年听得懂、记得住、愿意参与的一次文化实践。</p>
+        </div>
+
+        <div class="bg-knowledge-grid">
+          <article class="bg-knowledge-card bg-knowledge-card--zhu">
+            <header class="bg-knowledge-head">
+              <span class="knowledge-seal" aria-hidden="true">铸</span>
+              <div>
+                <p class="knowledge-kicker">主线 · 「纲」</p>
+                <h3>铸牢中华民族共同体意识</h3>
+              </div>
+            </header>
+            <p class="knowledge-lead">铸牢中华民族共同体意识，就是要引导各族人民牢固树立<strong>休戚与共、荣辱与共、生死与共、命运与共</strong>的共同体理念，增进对伟大祖国、中华民族、中华文化、中国共产党、中国特色社会主义的高度认同。</p>
+            <p class="knowledge-label">「四个与共」</p>
+            <ul class="pill-list">
+              <li>休戚与共</li><li>荣辱与共</li><li>生死与共</li><li>命运与共</li>
+            </ul>
+            <div class="knowledge-points">
+              <p><b>为什么是主线？</b> 中华民族共同体意识是国家统一之基、民族团结之本、精神力量之魂。民族工作、教育工作与文化建设，都要围绕这条主线同向发力。</p>
+              <p><b>如何落到教育中？</b> 用文物、故事、游戏和书信，把抽象概念变成可触摸的历史细节；让青少年在参与中理解「我们辽阔的疆域是各民族共同开拓的，我们悠久的历史是各民族共同书写的」。</p>
+              <p><b>这次实践怎么做？</b> 以昭陵六骏与马家塬车马为双案例，沿着「文物研究—教育转化—实地实施—效果评估」的闭环，让铸牢教育从一次宣讲延伸为一套可复用的课程与活动资源。</p>
+            </div>
+            <blockquote>各民族像石榴籽一样紧紧抱在一起。</blockquote>
+          </article>
+
+          <article class="bg-knowledge-card bg-knowledge-card--jin">
+            <header class="bg-knowledge-head">
+              <span class="knowledge-seal" aria-hidden="true">陇</span>
+              <div>
+                <p class="knowledge-kicker">甘肃 · 基层落地</p>
+                <h3>民族团结进步落实在甘肃</h3>
+              </div>
+            </header>
+            <p class="knowledge-lead">甘肃是多民族聚居省份，也是古丝绸之路的重要通道。当地把铸牢中华民族共同体意识贯穿民族团结进步工作全过程，推动各民族在<strong>空间、文化、经济、社会、心理</strong>等方面全方位嵌入，让共同体理念在陇原大地落地生根。</p>
+            <p class="knowledge-label">「五个互嵌」</p>
+            <ul class="pill-list">
+              <li>空间互嵌</li><li>文化互鉴</li><li>经济共兴</li><li>社会共治</li><li>心理共鸣</li>
+            </ul>
+            <div class="knowledge-points">
+              <p><b>创建格局：</b> 持续深化「一廊一区一带」民族团结进步创建行动，把河西走廊、陇东南与沿黄河—洮河地区串联成线，形成以点带面、全域推进的实践格局。</p>
+              <p><b>三项计划：</b> 推进各族青少年交流计划、各族群众互嵌式发展计划、旅游促进各民族交往交流交融计划，让各族群众在日常往来中加深理解、增进认同。</p>
+              <p><b>张家川实践：</b> 将民族团结进步教育融入博物馆研学、新时代文明实践、青少年交流与志愿服务；本项目在行政中心广场、县博物馆和县实践育人中心开展「三交史」宣讲，让宏大的共同体叙事在孩子们的书信、拼图与游戏里变得可感可亲。</p>
+            </div>
+            <blockquote>让民族团结进步创建，真正落实在基层、落实到青少年身边。</blockquote>
+          </article>
+        </div>
+      </div>
+
+      <div class="tabs__panel" id="panel-5" role="tabpanel" aria-labelledby="tab-5" tabindex="0">
+        <div class="split">
+          <div class="prose">
+            <p>中央民族大学聚焦铸牢中华民族共同体意识主线，深入实施<strong>「知行中华」铸魂育人工程</strong>。2024年以来，学校累计组织师生 <strong>2万余人次</strong>赴全国各地特别是边疆地区开展实践活动，引导学生在社会大课堂中受教育、长才干、作贡献，在实践中牢固树立中华民族共同体意识。</p>
+            <p>2026年春季学期以来，中央民族大学万余名师生走出校园，深入京内外百余个实践点位，从故宫红墙到科技一线，从社区街巷到田间地头，各族学子在广阔「大课堂」中读懂「何以中国」，在亲身体验中铸牢中华民族共同体意识。</p>
+            <p>在2026年学生暑期社会实践活动中，学校明确以「铸牢中华民族共同体意识」为主线，引导广大青年学子走进社会大课堂，在「行走的思政课」中受教育、长才干、作贡献。本项目作为学校暑期社会实践<strong>常规项目</strong>，以故宫「昭陵六骏」文物为载体，深入甘肃张家川开展「三交史」调研宣讲，正是对学校「知行中华」铸魂育人工程的积极响应与具体落实。</p>
+          </div>
+          <figure class="split__media">
+            <img src="assets/img/gugong-2.webp" alt="中央民族大学教学楼" loading="lazy">
+            <figcaption style="font-size:13px;color:var(--ink-3)">中央民族大学——「知行中华」铸魂育人工程的出发地，也是这支实践队的起点。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="route-heading-row route-heading-row--spaced" data-reveal>
+      <h3 class="inline-title">实践行程 · 从故宫到边疆</h3>
+      <p class="inline-hint">从东经 116° 的北京，走到东经 106° 的张家川。路线向西，文化向心。</p>
+    </div>
+    <div class="ribbon-map ribbon-map--itinerary" data-route-map data-route-caption="文化信使 · 自东向西" data-reveal>
+      <noscript><p class="ribbon-map__fallback">实践路线：北京中央民族大学 → 故宫博物院 → 西安碑林博物馆 → 甘肃张家川。</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 文化溯源 ==================== -->
+<section class="section" id="culture">
+  <div class="container">
+    <div class="section__head" data-reveal>
+      <p class="eyebrow">Cultural Origins</p>
+      <h2 class="section__title">文化<em>溯源</em> · 昭陵六骏</h2>
+      <p class="section__lead">六匹战马，六个名字，承载着一段跨越 1300 年的交融史。点击任意一骏，读懂它名字里的语言、毛色里的草原，与赞语里的星空。</p>
+    </div>
+
+    <figure class="scroll-banner" data-reveal>
+      <img src="assets/img/zhaoling-liujun-scroll.webp" width="2560" height="1440" alt="金代赵霖《昭陵六骏图》卷长卷切片，六段画心错落排布" loading="lazy">
+      <figcaption>金代赵霖《昭陵六骏图》卷 · 长卷切片——六段画心错落排布，画卷与石刻在此相遇。</figcaption>
+    </figure>
+
+    <div class="split" style="margin-bottom:clamp(38px,4.5vw,58px)">
+      <div class="prose" data-reveal>
+        <p>昭陵六骏是唐太宗李世民在唐朝开国征战时骑乘的六匹战马。为纪念它们在开国战争中立下的赫赫战功，李世民令将六匹坐骑刻成石雕，列置于昭陵北麓祭坛东西两庑。</p>
+        <p>六骏由画家<strong>阎立本</strong>绘稿，名匠<strong>阎立德</strong>主持镌刻，李世民亲自撰写赞文，代表了唐代陵墓雕刻的最高艺术水准。</p>
+        <p>六骏分别为：<strong>特勒骠、青骓、什伐赤、飒露紫、拳毛騧、白蹄乌</strong>，对应李世民征讨宋金刚、窦建德、王世充、刘黑闼、薛仁杲等关键战役。石刻采用高浮雕手法，姿态各异，或昂首挺立，或四蹄腾空，战马中箭负伤之状与将军拔箭之姿栩栩如生，其中「飒露紫」前丘行恭拔箭的画面最为动人。</p>
+        <p>遗憾的是，1914年「飒露紫」和「拳毛騧」被盗运出境，现藏于美国宾夕法尼亚大学博物馆；其余四骏现藏于西安碑林博物馆。六骏不仅是开国历史的实物见证，更是中国古代雕塑艺术的瑰宝，承载着千年的民族记忆与文物沧桑，为中国古代民族交流交往交融的研究提供了珍贵的史料。</p>
+      </div>
+      <figure class="split__media" data-reveal>
+        <img src="assets/img/six-paint-c.webp" alt="金代赵霖《昭陵六骏图》卷（局部）：身中数箭仍奋力奔驰的战马，故宫博物院藏">
+        <figcaption style="font-size:13px;color:var(--ink-3)">金代赵霖《昭陵六骏图》卷（局部）· 故宫博物院藏。画家以工笔重彩如实摹写昭陵六骏石刻，战马中箭负伤之状与将军拔箭之姿栩栩如生。
+          <a href="https://www.dpm.org.cn/vr/stone-moat/wyd_86.html" target="_blank" rel="noopener" style="display:inline-block;margin-top:9px">点击查看故宫藏《昭陵六骏图》卷 ↗</a>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="quote" data-reveal>一马一故事，一名一交融。</div>
+    <div class="prose" style="max-width:900px;margin-bottom:clamp(34px,4vw,52px)" data-reveal>
+      <p>六匹战马，六个名字，承载着一段跨越 1300 年的交融史。昭陵六骏作为唐太宗李世民为纪念六匹功勋战马而刻的石刻，现今藏于西安碑林博物馆与美国宾夕法尼亚大学博物馆；《昭陵六骏图》卷，现藏于故宫博物院。它们的名字听起来不像汉语——「特勤」「什伐」「飒露」「白蹄」「青骓」等。经学者考证，它们来自<strong>突厥语、波斯语</strong>等。一个中原皇帝，用外来语言命名自己的战马，这本身就是一个关于民族交往交流交融的故事。2026 马年，故宫博物院与中央民族大学联合启动「文化信使」计划。我们以此为起点，推出相关微课，从六匹战马的名字出发，讲述一段千年交融史。</p>
+    </div>
+
+      <div class="hex-layout" data-reveal>
+        <div class="hex-left">
+          <div class="hex-grid">
+            <button class="hex is-on" data-horse="0" data-big="assets/img/horses/telebiao.webp" data-bigname="正比形象 · 特勒骠（光）" aria-haspopup="dialog" aria-label="特勒骠">
+              <img src="assets/img/horses/telebiao.webp" alt="特勒骠 IP 形象" loading="lazy"><span class="hex__name">特勒骠</span>
+            </button>
+            <button class="hex" data-horse="1" data-big="assets/img/horses/qingzhui.webp" data-bigname="正比形象 · 青骓（电）" aria-haspopup="dialog" aria-label="青骓">
+              <img src="assets/img/horses/qingzhui.webp" alt="青骓 IP 形象" loading="lazy"><span class="hex__name">青骓</span>
+            </button>
+            <button class="hex" data-horse="2" data-big="assets/img/horses/shifachi.webp" data-bigname="正比形象 · 什伐赤（火）" aria-haspopup="dialog" aria-label="什伐赤">
+              <img src="assets/img/horses/shifachi.webp" alt="什伐赤 IP 形象" loading="lazy"><span class="hex__name">什伐赤</span>
+            </button>
+            <button class="hex" data-horse="3" data-big="assets/img/horses/sa-luzi.webp" data-bigname="正比形象 · 飒露紫（露）" aria-haspopup="dialog" aria-label="飒露紫">
+              <img src="assets/img/horses/sa-luzi.webp" alt="飒露紫 IP 形象" loading="lazy"><span class="hex__name">飒露紫</span>
+            </button>
+            <button class="hex" data-horse="4" data-big="assets/img/horses/quanmaogua.webp" data-bigname="正比形象 · 拳毛騧（月）" aria-haspopup="dialog" aria-label="拳毛騧">
+              <img src="assets/img/horses/quanmaogua.webp" alt="拳毛騧 IP 形象" loading="lazy"><span class="hex__name">拳毛騧</span>
+            </button>
+            <button class="hex" data-horse="5" data-big="assets/img/horses/baitiwu.webp" data-bigname="正比形象 · 白蹄乌（云）" aria-haspopup="dialog" aria-label="白蹄乌">
+              <img src="assets/img/horses/baitiwu.webp" alt="白蹄乌 IP 形象" loading="lazy"><span class="hex__name">白蹄乌</span>
+            </button>
+          </div>
+          <p class="hex-cap">正比与 Q 版共用同一套元素语法：水滴、月牙、云团、放射线、闪电折、火焰尖，分散嵌入鬃毛、鞍鞯、脚腕绒毛等局部。</p>
+        </div>
+        <div class="hex-big">
+          <div class="hex-big__frame"><img id="hexBigImg" src="assets/img/horses/telebiao.webp" alt="六骏大图预览"></div>
+          <p id="hexBigName">正比形象 · 特勒骠（光）</p>
+        </div>
+      </div>
+
+    <!-- 六骏详情模板（供弹窗读取，静态内容亦保留于文档中） -->
+    <div id="horseTemplates" hidden>
+      <div data-tpl="0">
+        <h4>意象解读</h4>
+        <p>赞语「承声半汉」中「天汉」即银河天光，战马嘶鸣响彻云霄，带普照万物辉意。特勒骠由<strong>突厥特勤部族进献</strong>，是唐王朝与北方突厥部族友好往来、民族互信的标志性信物，黄白皮毛在日光下流光溢彩，光芒普照四方，象征中原、草原、西域各族共享盛世荣光。它三日连经八仗仍步履从容，代表多民族联军同心协力、稳守疆土，光芒不分远近、不分族别，映照各民族同心共建大一统王朝的壮阔历史。</p>
+      </div>
+      <div data-tpl="1">
+        <h4>意象解读</h4>
+        <p>赞语「足轻电影」直接联结闪电意象，雷霆闪电是天地间共有的磅礴力量，象征平定分裂、扫清战乱的雷霆之势。青骓身中数箭依旧冲锋向前，代表各民族将士不惧牺牲，合力结束割据纷争，实现天下一统。凌厉迅疾的闪电划破混沌，如同大唐整合四方部族、消解地域隔阂，让各民族归于统一政权之下，共享安定生活；闪电一往无前的力量，象征中华民族共同体凝聚各方、御动荡的强大合力。</p>
+      </div>
+      <div data-tpl="2">
+        <h4>意象解读</h4>
+        <p>名中「什伐」为<strong>古波斯语骏马译音</strong>，赤红皮毛如熊熊烈火，是中原与西域丝绸之路民族交融的珍贵见证。唐初战乱未平，烈焰象征保家卫国、不分中原西域各族子弟、皆怀保境安民之心的滚烫初心。火焰生生不息、温暖四方，寓意各族血脉相融、同心共筑盛世薪火；丝路之上各族商贸互通、文化交融，共筑包容多元的大唐文明。</p>
+      </div>
+      <div data-tpl="3">
+        <h4>意象解读</h4>
+        <p>赞语「紫燕超跃」描摹战马轻盈迅猛的身姿，清晨草间垂露是华夏大地共通的诗意意象；浮雕定格战马忍痛垂首的画面，将战场牺牲的厚重，凝于露珠将坠未坠的温柔意象。马名「飒露」与「露」意象天然呼应，以温润自然意象诠释战马舍身护主、军民同心的动人画面。初唐统一战争中，中原将士与边疆部族子弟并肩作战，飒露紫承载的不只是君臣战马情谊，更是各民族将士共赴国难、守望相助的历史缩影；露水包容万物的特质，暗合各民族兼容共生的内核。</p>
+      </div>
+      <div data-tpl="4">
+        <h4>意象解读</h4>
+        <p>赞语「月精按辔」直接锚定月亮意象，明月是中华各民族共有的文化符号，不分地域、不分族群，皆是寄托家国情怀的载体。拳毛騧卷曲鬃毛如月光漫散，洛水之战艰苦鏖战、九箭殉国的悲壮故事，在月色烘托下，勾勒出各民族将士同心平定战乱、守护疆土的壮阔图景。这匹战马<strong>源自北方草原部族贡马</strong>，是中原与草原民族多种交流、物产互通的实物见证；清冷辽阔的月光意象，象征中原与草原各族共沐同一片清辉、命运紧紧相连。</p>
+      </div>
+      <div data-tpl="5">
+        <h4>意象解读</h4>
+        <p>赞语「追风骏足」点明其奔袭千里的速度，长风流云是天地间无分地域的共同景观。浅水原之战昼夜疾驰二百里平定西北，这一战役实现西北边疆安定，推动中原与西北各民族深度融合。战马通体乌黑如沉云，雪白四蹄似云隙天光；流云无边界、互通天地的特质，象征中原与西北各族打破隔阂、往来互通，同心构筑统一安定的疆域。</p>
+      </div>
+    </div>
+
+    <!-- 设计理念 -->
+    <div class="idea-block" style="margin-top:clamp(50px,6vw,80px)" data-reveal>
+      <header class="idea-block__head">
+        <h3>设计理念</h3>
+        <p>千年石刻，如何与当代对话</p>
+      </header>
+      <div class="idea-block__body">
+        <p>千年石刻，如何与当代对话？昭陵六骏 IP 设计的答案，是四个字：<strong>守正创新</strong>。</p>
+        <p><strong>守正，是守住历史的根。</strong>六骏的每一寸毛色、每一处箭伤、每一条姿态，都严格遵循石刻原作与文献记载。三花马鬃、束尾造型，是唐代战马统一的视觉语言，也是我们保留的基本盘。</p>
+        <p><strong>创新，是注入当代的魂。</strong>我们以六种自然元素——露、月、云、光、电、火——分别对应六匹战马，让千年前的浮雕有了新的生命表情。露的灵动、月的清冷、云的迅疾、光的炽热、电的爆发、火的威猛，每一匹骏马都拥有了独一无二的「性格标签」。</p>
+        <p>设计分为两层：<strong>正比形象</strong>承载文化深度，<strong>Q 版形象</strong>日常亲和。前者可以登上展台，后者可以走进聊天框，一马千面，各得其所。</p>
+      </div>
+    </div>
+
+    <!-- 创新亮点 -->
+    <div class="idea-block" style="margin-top:clamp(50px,6vw,80px)" data-reveal>
+      <header class="idea-block__head">
+        <h3>创新亮点</h3>
+        <p>打造跨场景传播能力</p>
+      </header>
+      <div class="idea-block__body">
+        <p>元素与史实的深度咬合，是本设计区别于常规文物二创的核心所在。六种元素皆从<strong>赞语、马名、毛色、姿态</strong>中推演而来，每一组对应均有出处可循，而非随意附会。</p>
+        <p>在视觉转化上，将自然元素拆解为可识别的符号语言，分散嵌入鬃毛、鞍鞯、脚腕毛等局部——水滴、月牙、云团、放射线、闪电折、火焰尖，各自对应，形成统一的装饰体系。</p>
+        <p><strong>正比与 Q 版双轨并行</strong>，前者承载文化厚度，后者降低认知门槛，二者共用同一套元素语法，使同一 IP 在不同场景下具备差异化的呈现能力。</p>
+      </div>
+    </div>
+
+    <!-- 赋能传播作用 -->
+    <div class="idea-block" style="margin-top:clamp(50px,6vw,80px)" data-reveal>
+      <header class="idea-block__head">
+        <h3>赋能传播作用</h3>
+        <p>如何建立轻盈的现代表达方式</p>
+      </header>
+      <div class="idea-block__body">
+        <p>六骏古名生僻，不易记忆。以自然元素作为识别标签，便于受众快速建立印象，继而引发对马名、战事、赞语等历史信息的好奇与主动探寻。</p>
+        <p>六种元素承载六种不同的精神气质——露之柔韧、月之孤守、电之爆发、火之刚猛等——使战马形象兼具性格厚度与情感温度，利于唤起共鸣。</p>
+        <p>应用上形成梯度布局：<strong>正比形象</strong>面向文化展览、品牌联名、数字藏品等场景；<strong>Q 版形象</strong>可延伸至表情包、挂饰、毛绒玩具、主题日历等日常消费品。</p>
+        <p>受众在使用和分享过程中自然附带历史背景的科普，使文创产品成为文化传播的媒介。整体而言，设计为昭陵六骏寻找到一种更轻盈的现代表达方式，使其在保持历史内核的同时，以更易触达的形态融入当代生活。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== 成果展示 ==================== -->
+<section class="section" id="achievement">
+  <div class="container">
+    <div class="section__head" data-reveal>
+      <p class="eyebrow">Achievements</p>
+      <h2 class="section__title">成果<em>展示</em></h2>
+      <p class="section__lead">从一份调研报告、一集微课，到一套游戏、一组明信片与一部影像——成果彼此支撑，构成从「文物研究」到「教育传播」的完整链条。</p>
+    </div>
+
+    <nav class="result-index" aria-label="成果展示目录" data-reveal>
+      <div class="result-index__primary">
+        <a href="#result-theory"><span>01</span><b>理论成果</b></a>
+        <a href="#practice-results"><span>02</span><b>实践成果</b></a>
+      </div>
+      <div class="result-index__secondary">
+        <p>实践成果目录</p>
+        <div class="result-index__links">
+          <a href="#result-course">a · 微课</a>
+          <a href="#result-games">b · 游戏</a>
+          <a href="#result-creative">c · 文创 / 明信片</a>
+          <a href="#result-film">d · 影像 / 实践掠影</a>
+          <a href="#result-mailbox">e · 石榴信箱</a>
+          <a href="#result-matrix">f · 传播矩阵</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 01 理论成果 -->
+    <section class="result-block" id="result-theory" aria-labelledby="theory-title">
+      <header class="result-heading" data-reveal>
+        <span class="result-code">01</span>
+        <div>
+          <p class="result-kicker">Theoretical Outputs</p>
+          <h3 id="theory-title">理论成果</h3>
+          <p>五个层面，凝练这次实践的问题意识、方法路径与推广价值。</p>
+        </div>
+      </header>
+
+      <div class="theory-grid" data-reveal>
+        <div class="theory-card">
+          <h4>主线落地<br>以文物故事讲清共同体</h4>
+          <p>以昭陵六骏马文化符号为切入点，用具象的文物故事替代抽象理论，向青少年生动阐释各民族交往交流交融的千年历史，让中华民族一家亲理念在基层青少年群体中可感、可知、可认同。</p>
+        </div>
+        <div class="theory-card">
+          <h4>文化「两创」<br>打通故宫文物的边疆传播通道</h4>
+          <p>打破故宫文物的地域局限，把馆藏书画转化为微课、互动游戏、拼图、书信等轻量化体验，让国宝走出展厅、走进边疆课堂，为传统文化的当代传播提供新的内容形态。</p>
+        </div>
+        <div class="theory-card">
+          <h4>馆校协同<br>形成可复制的育人链条</h4>
+          <p>联动故宫博物院、中央民族大学、马家塬车舆博物馆与地方青少年阵地，形成「故宫学术资源 + 边疆在地文化 + 青年宣讲队伍」的协同机制，沉淀「故宫+边疆+青年」协同育人模式。</p>
+        </div>
+        <div class="theory-card">
+          <h4>青年成长<br>在「行走的思政课」中受教</h4>
+          <p>以教育宣讲、田野调研、影像记录锻炼青年学子的研究、表达与协作能力；在真实场景中理解中华民族多元一体格局，完成从「故宫学习者」到「边疆讲述者」的角色转变。</p>
+        </div>
+        <div class="theory-card">
+          <h4>一手资料<br>为后续研究与教育实践留存样本</h4>
+          <p>通过访谈、问卷、书信、影像与课堂观察，收集民族地区青少年文化认知与活动反馈的一手素材，形成专题调研报告，为丝路马文化、民族交融与文博社教研究提供鲜活案例。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 实践成果 -->
+    <div class="practice-results" id="practice-results">
+      <header class="result-heading result-heading--practice" data-reveal>
+        <span class="result-code">02</span>
+        <div>
+          <p class="result-kicker">Practice Outputs</p>
+          <h3>实践成果</h3>
+          <p>以微课、游戏、文创、影像、石榴信箱与传播矩阵，把一次实践延伸为一套可以被反复使用的教育资源。</p>
+        </div>
+      </header>
+
+      <!-- a 微课 -->
+      <article class="result-item" id="result-course" aria-labelledby="course-title">
+        <header class="result-item__head" data-reveal>
+          <span class="result-letter">a</span>
+          <div>
+            <p class="result-kicker">Micro Courses</p>
+            <h4 id="course-title">微课 · 一马一故事，一名一交融</h4>
+          </div>
+          <div class="result-tags"><span>8 集</span><span>5–8 分钟 / 集</span><span>持续更新</span></div>
+        </header>
+        <div class="course-layout">
+          <div class="prose" data-reveal>
+            <p>微课以「一马一故事，一名一交融」为主线，从六骏名字的语源考证出发，追溯各民族通过<strong>贡马、贸易、联姻</strong>等方式汇聚中原的历史轨迹，呈现中华文明在物质与精神双重层面的深度交融。</p>
+            <p>8 集课程以语源学考证为支撑，把「交融」这一抽象概念转化为具体可感的人物与故事。边疆青少年在「六骏名字为什么不像汉语」的悬念引导下，完成对中华民族多元一体格局的直观认知。课程脚本与课程框架已完成，正在持续打磨、陆续上线。</p>
+            <p>每次宣讲后，团队都会围绕宣讲效果、文化认知与当地马文化现状收集反馈，让微课在真实课堂中不断迭代。</p>
+          </div>
+          <div class="episode-board" data-reveal>
+            <p class="episode-board__label">系列结构 · 八集</p>
+            <ol class="episode-list">
+              <li><b>01</b><span>什么是「骏」</span></li>
+              <li><b>02</b><span>特勒骠：名字里的突厥回声</span></li>
+              <li><b>03</b><span>青骓与什伐赤：箭痕里的并肩</span></li>
+              <li><b>04</b><span>飒露紫：一次拔箭与一场同心</span></li>
+              <li><b>05</b><span>拳毛騧与白蹄乌：毛色里的丝路</span></li>
+              <li><b>06</b><span>从昭陵到马家塬：一辆车的三交史</span></li>
+              <li><b>07</b><span>石榴籽课堂：把文物讲给孩子听</span></li>
+              <li><b>08</b><span>一封来自张家川的信</span></li>
+            </ol>
+          </div>
+        </div>
+        <figure class="lesson-video" data-reveal>
+          <video controls preload="none" playsinline poster="assets/video/micro-lesson-poster.webp">
+            <source src="assets/video/micro-lesson.mp4" type="video/mp4">
+            您的浏览器不支持视频播放，可下载后观看。
+          </video>
+          <figcaption>微课先导片 ·「一马一故事，一名一交融」——从「什么是骏」讲起，带出六匹战马的名字为什么不像汉语。</figcaption>
+        </figure>
+      </article>
+
+      <!-- b 游戏 -->
+      <article class="result-item" id="result-games" aria-labelledby="games-title">
+        <header class="result-item__head" data-reveal>
+          <span class="result-letter">b</span>
+          <div>
+            <p class="result-kicker">Interactive Games</p>
+            <h4 id="games-title">游戏 · 在玩中学，在学中记</h4>
+          </div>
+          <div class="result-tags"><span>3 款</span><span>课堂可玩</span><span>玩学一体</span></div>
+        </header>
+        <p class="result-item__lead" data-reveal>拼图、翻翻乐、消消乐三款小游戏以昭陵六骏形象与知识为核心，构成从感知、辨认到记忆的渐进式学习体验。</p>
+        <div class="grid grid--3">
+          <article class="game" data-reveal>
+            <div class="game__top game__top--cover"><img src="assets/img/game-cover-puzzle.webp" alt="神奇六骏拼图游戏封面" loading="lazy"></div>
+            <div class="game__body">
+              <div class="game__steps"><span class="step step--on">玩</span><span class="step step--on">学</span><span class="step step--on">记</span></div>
+              <h4 class="game__title">神奇六骏拼图</h4>
+              <p class="game__text">以昭陵六骏为创作原型，将唐代石刻转化为趣味拼图。参与者在拼合碎片的过程中认识六骏形象，在动手协作中读懂盛唐历史。<br><br>亲手拼凑骏马轮廓，在一块块拼图里复原石刻原貌，触摸千年前战马的英姿。</p>
+              <a class="btn btn--line btn--sm" href="games/pintu.html">开始拼图
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+          <article class="game" data-reveal>
+            <div class="game__top game__top--cover"><img src="assets/img/game-cover-flip.webp" alt="翻翻乐游戏封面" loading="lazy"></div>
+            <div class="game__body">
+              <div class="game__steps"><span class="step step--on">玩</span><span class="step step--on">学</span><span class="step step--on">记</span></div>
+              <h4 class="game__title">翻翻乐</h4>
+              <p class="game__text">辨识骏影两两相逢，慧眼甄别昭陵骏马形貌，消释间铭记六骏印记，窥见大唐民族交融的壮阔图景。<br><br>于一翻一寻中，邂逅六骏传奇；翻开卡牌探寻故事，在趣味配对中遇见骏马印象。</p>
+              <a class="btn btn--line btn--sm" href="games/fangfangle.html">开始配对
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+          <article class="game" data-reveal>
+            <div class="game__top game__top--cover"><img src="assets/img/game-cover-match.webp" alt="消消乐游戏封面" loading="lazy"></div>
+            <div class="game__body">
+              <div class="game__steps"><span class="step step--on">玩</span><span class="step step--on">学</span><span class="step step--on">记</span></div>
+              <h4 class="game__title">消消乐</h4>
+              <p class="game__text">在快速识别中强化记忆。以六骏形象为核心，让玩家在连续消除的节奏里反复辨认马名与特征，把「看一眼」变成「记得住」。<br><br>每款游戏结束后的知识弹窗，将操作收获沉淀为知识认知。</p>
+              <a class="btn btn--line btn--sm" href="games/xiaoxiaole.html">开始挑战
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </article>
+
+      <!-- c 文创与明信片 -->
+      <article class="result-item" id="result-creative" aria-labelledby="creative-title">
+        <header class="result-item__head" data-reveal>
+          <span class="result-letter">c</span>
+          <div>
+            <p class="result-kicker">Cultural Products &amp; Postcards</p>
+            <h4 id="creative-title">文创 · 文创、明信片</h4>
+          </div>
+          <div class="result-tags"><span>4 类文创</span><span>3 组明信片</span><span>白底统一</span></div>
+        </header>
+        <p class="result-item__lead" data-reveal>把千年石刻化为实物与数字周边，也把文创变成宣讲课堂的教具。让文物故事看得见、摸得着、寄得走。</p>
+
+        <div class="product-grid" data-reveal>
+          <article class="product-card">
+            <div class="product-card__media"><img src="assets/img/game-cover-puzzle.webp" alt="六骏拼图" loading="lazy"></div>
+            <div class="product-card__body"><span>01</span><h5>六骏拼图</h5><p>在拼合中认识石刻轮廓，成为宣讲现场最受孩子欢迎的互动教具之一。</p></div>
+          </article>
+          <article class="product-card">
+            <div class="product-card__media product-card__media--contain"><img src="assets/img/keychain.webp" alt="六骏主题亚克力钥匙扣与挂件" loading="lazy"></div>
+            <div class="product-card__body"><span>02</span><h5>亚克力钥匙扣 / 挂件</h5><p>同源卡通形象，轻巧便携，让六骏从文物现场走进日常。</p></div>
+          </article>
+          <article class="product-card">
+            <div class="product-card__media"><img src="assets/img/wenchuang-sticker.webp" alt="昭陵六骏主题贴纸" loading="lazy"></div>
+            <div class="product-card__body"><span>03</span><h5>主题贴纸</h5><p>以白底承托六骏色彩，一守古意、一展新生，适配手账与课堂奖励。</p></div>
+          </article>
+          <article class="product-card">
+            <div class="product-card__media product-card__media--postcard">
+              <div class="mini-postcard"><img src="assets/img/horses/sa-luzi.webp" alt="六骏明信片预览"><b>昭陵六骏</b><i>白底 · 暖金 · 朱红邮戳</i></div>
+            </div>
+            <div class="product-card__body"><span>04</span><h5>系列明信片</h5><p>三组系列在白底上统一呈现，让文物图像、历史叙事与青年表达自然相连。</p></div>
+          </article>
+        </div>
+
+        <div class="postcard-heading" data-reveal>
+          <div><p class="result-kicker">Three Postcard Series</p><h5>系列明信片 · 三组系列</h5></div>
+          <p>所有明信片统一采用<strong>纯白背景</strong>、暖金细线与朱红邮戳，以同一套视觉语法串起「文脉寻踪—六骏新传—同心愿景」。</p>
+        </div>
+
+        <div class="postcard-wall" data-reveal>
+          <section class="postcard-series">
+            <header class="postcard-series__head"><span>系列一</span><h5>文脉寻踪</h5><p>从校园走向故宫，在画卷与展柜之间寻找六骏的来路。</p></header>
+            <figure class="postcard">
+              <div class="postcard__image"><img src="assets/img/honor-05-gugong-study.webp" alt="实践团在故宫研读马主题书画" loading="lazy"></div>
+              <figcaption><span>故宫研学</span><b>在故宫，第一次读懂六骏</b><p>从《昭陵六骏图》卷出发，把展柜里的历史带回课堂。</p></figcaption>
+              <i class="postcard__stamp">马上同心</i>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__image"><img src="assets/img/gugong-2.webp" alt="中央民族大学校园建筑" loading="lazy"></div>
+              <figcaption><span>校园出发</span><b>从民大出发，做文化信使</b><p>把学术问题变成教育行动，沿一条向西的路线出发。</p></figcaption>
+              <i class="postcard__stamp">同心共铸</i>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__image"><img src="assets/img/honor-01-ceremony.webp" alt="十佳志愿者表彰大会暨读书创作大赛成果交流会现场" loading="lazy"></div>
+              <figcaption><span>文化信使 · 成长</span><b>从志愿讲述到文化信使</b><p>在故宫社教与志愿服务的现场，我们学会把文物故事讲给更多人听。</p></figcaption>
+              <i class="postcard__stamp">神骏新传</i>
+            </figure>
+          </section>
+
+          <section class="postcard-series">
+            <header class="postcard-series__head"><span>系列二</span><h5>六骏新传</h5><p>以石刻形象为根，用当代视觉语言重述六匹战马的故事。</p></header>
+            <figure class="postcard">
+              <div class="postcard__image postcard__image--horse"><img src="assets/img/horses/sa-luzi.webp" alt="昭陵六骏二创形象飒露紫" loading="lazy"></div>
+              <figcaption><span>飒露紫 · 露</span><b>一滴露，记住一次守望</b><p>轻盈、柔韧，也藏着同心的力量。</p></figcaption>
+              <i class="postcard__stamp">神骏新传</i>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__image postcard__image--horse"><img src="assets/img/horses/shifachi.webp" alt="昭陵六骏二创形象什伐赤" loading="lazy"></div>
+              <figcaption><span>什伐赤 · 火</span><b>一团火，照亮丝路来路</b><p>名字里的多语回声，是文明互鉴的注脚。</p></figcaption>
+              <i class="postcard__stamp">同心共铸</i>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__image postcard__image--horse"><img src="assets/img/horses/baitiwu.webp" alt="昭陵六骏二创形象白蹄乌" loading="lazy"></div>
+              <figcaption><span>白蹄乌 · 云</span><b>一片云，奔向更远的地方</b><p>六骏的故事，还在孩子们的想象里继续。</p></figcaption>
+              <i class="postcard__stamp">文化信使</i>
+            </figure>
+          </section>
+
+          <section class="postcard-series">
+            <header class="postcard-series__head"><span>系列三</span><h5>同心愿景</h5><p>把孩子们写下的梦想、快乐与真心话，放进一张张明信片。</p></header>
+            <figure class="postcard">
+              <div class="postcard__image postcard__image--selected"><img src="assets/img/postcards/selected-astronaut.webp" alt="石榴信箱精选明信片：小朋友说我的梦想是宇航员"></div>
+              <figcaption><span>童言 · 梦想</span><b>「我的梦想是宇航员」</b><p>把梦想写在明信片上，让它从张家川飞向更远的地方。</p></figcaption>
+              <i class="postcard__stamp">石榴信箱</i>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__image postcard__image--selected"><img src="assets/img/postcards/selected-happy.webp" alt="石榴信箱精选明信片：小朋友说要每天做开开心心的自己"></div>
+              <figcaption><span>童言 · 快乐</span><b>「要每天做开开心心的自己」</b><p>这是孩子写给世界的一句话，也是石榴信箱里最明亮的回声。</p></figcaption>
+              <i class="postcard__stamp">同心共铸</i>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__image postcard__image--selected"><img src="assets/img/postcards/selected-true-happiness.webp" alt="石榴信箱精选明信片：真正的快乐"></div>
+              <figcaption><span>童言 · 真心</span><b>「真正的快乐」</b><p>一张明信片，留住一次真诚的回应，也把快乐寄向未来。</p></figcaption>
+              <i class="postcard__stamp">骏途同心</i>
+            </figure>
+          </section>
+        </div>
+      </article>
+
+      <!-- d 影像 · 实践掠影 -->
+      <section class="cinema-band" id="result-film" aria-labelledby="film-title">
+        <div class="cinema-band__inner">
+          <header class="cinema-head" data-reveal>
+            <span class="cinema-code">d</span>
+            <div>
+              <p class="eyebrow">Documentary &amp; Practice Snapshots</p>
+              <h4 id="film-title">影像 · 让走过的路被看见</h4>
+              <p>影像记录的，不只是一支队伍走过的路，也是孩子们第一次与千年文物相遇的瞬间。</p>
+            </div>
+            <span class="cinema-stamp">2026 · 文化信使</span>
+          </header>
+
+          <div class="videos videos--two" data-reveal>
+            <div class="video-card video-card--main" data-video="assets/video/fieldwork.mp4" data-title="「马上同心·文化信使」之旅 影像纪实" role="button" tabindex="0" aria-label="播放影像纪实">
+              <img src="assets/video/fieldwork-poster.webp" alt="影像纪实封面" loading="lazy">
+              <div class="video-card__play"><i aria-hidden="true"></i></div>
+              <div class="video-card__meta"><h3>点击观看 ｜ 影像纪实</h3><p>「马上同心 · 文化信使」之旅 · 约 5 分钟</p></div>
+            </div>
+            <div class="video-card video-card--main" data-video="assets/video/ip-design.mp4" data-title="昭陵六骏 IP 设计思路" role="button" tabindex="0" aria-label="播放昭陵六骏 IP 设计思路">
+              <img src="assets/video/ip-design-poster.webp" alt="昭陵六骏 IP 设计思路视频封面" loading="lazy">
+              <div class="video-card__play"><i aria-hidden="true"></i></div>
+              <div class="video-card__meta"><h3>点击观看 ｜ 六骏形象设计思路</h3><p>从自然元素到正比、Q 版形象 · 约 1 分钟</p></div>
+            </div>
+          </div>
+
+          <div class="cinema-gallery" data-reveal>
+            <div class="cinema-gallery__head">
+              <div><p class="eyebrow">Practice Snapshots</p><h4>实践掠影</h4></div>
+              <p>从故宫红墙到张家川的广场与课堂，从展柜前的凝视到拼图摊前的笑声。</p>
+            </div>
+            <div class="gallery gallery--cinema" data-gallery>
+              <figure class="shot" data-full="assets/img/pw-1.webp" data-cap="启程 · 校园集结——实践团在校园「铸牢中华民族共同体意识」主题雕塑前合影，从民大出发奔赴文化信使之旅。">
+                <img src="assets/img/pw-1.webp" alt="实践团在校园主题雕塑前合影" loading="lazy"><figcaption class="shot__cap">启程 · 校园集结</figcaption>
+              </figure>
+              <figure class="shot" data-full="assets/img/pw-2.webp" data-cap="田野调研——在张家川马家塬车舆博物馆，队员们观摩战国车马器出土展陈，记录「三交史」实物证据。">
+                <img src="assets/img/pw-2.webp" alt="马家塬车舆博物馆观摩车马器展陈" loading="lazy"><figcaption class="shot__cap">田野调研 · 车舆博物馆</figcaption>
+              </figure>
+              <figure class="shot" data-full="assets/img/pw-3.webp" data-cap="馆内研学——讲解员为队员们讲述历代车马文物背后的民族交往交流交融故事。">
+                <img src="assets/img/pw-3.webp" alt="博物馆内聆听车马文物讲解" loading="lazy"><figcaption class="shot__cap">馆内研学</figcaption>
+              </figure>
+              <figure class="shot" data-full="assets/img/pw-4.webp" data-cap="观展记录——在「萧萧马鸣映汗青」砖雕展柜前驻足细读，触摸千年马文化的纹样与肌理。">
+                <img src="assets/img/pw-4.webp" alt="观展记录砖雕展品" loading="lazy"><figcaption class="shot__cap">观展记录</figcaption>
+              </figure>
+              <figure class="shot" data-full="assets/img/pw-5.webp" data-cap="边疆集结——实践团在张家川展开团旗，「文物洞疆·神骏传心」从这里走进边疆课堂。">
+                <img src="assets/img/pw-5.webp" alt="实践团在张家川展开团旗合影" loading="lazy"><figcaption class="shot__cap">边疆集结 · 张家川</figcaption>
+              </figure>
+              <figure class="shot" data-full="assets/img/pw-6.webp" data-cap="广场拼图摊——志愿者与孩子们一起复原六骏拼图，在动手体验中认识六骏形象。">
+                <img src="assets/img/pw-6.webp" alt="广场上志愿者与孩子们拼六骏拼图" loading="lazy"><figcaption class="shot__cap">广场拼图摊</figcaption>
+              </figure>
+              <figure class="shot" data-full="assets/img/pw-7.webp" data-cap="宣讲课堂——「三交史」微课互动环节，孩子们踊跃举手回答六骏名字里的秘密。">
+                <img src="assets/img/pw-7.webp" alt="宣讲课堂上孩子们踊跃举手" loading="lazy"><figcaption class="shot__cap">宣讲课堂 · 互动问答</figcaption>
+              </figure>
+              <figure class="shot" data-full="assets/img/pw-8.webp" data-cap="成果定格——微课录制收官，志愿者与孩子们在「从数字到史书」主题背景前合影留念。">
+                <img src="assets/img/pw-8.webp" alt="微课录制收官合影" loading="lazy"><figcaption class="shot__cap">成果定格</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <blockquote class="cinema-quote" data-reveal>马的故事仍在继续。从石刻到书本，从宣讲到游戏，从故宫到张家川，流淌进每一个孩子的心里。这，便是「文化信使」的意义。</blockquote>
+        </div>
+      </section>
+
+      <!-- e 石榴信箱 -->
+      <section class="mailbox-band" id="result-mailbox" aria-labelledby="mailbox-title">
+        <div class="container">
+          <header class="mailbox-head" data-reveal>
+            <span class="result-letter">e</span>
+            <div>
+              <p class="eyebrow">Pomegranate Mailbox</p>
+              <h4 id="mailbox-title">石榴信箱 · 把孩子们的话寄向未来</h4>
+              <p>现场共收集 56 份书信与绘画。其中 34 份谈到「故宫与家乡的关系」，31 份出现「中华民族」「共同体」相关表达。每一张明信片，都是一次真诚的回应。</p>
+            </div>
+          </header>
+
+          <div class="mailbox-layout">
+            <div class="mailbox-postcards" data-mailbox-cards data-reveal>
+              <figure class="mail-postcard">
+                <div class="mail-postcard__head"><span>石榴信箱 · 01</span><span class="mail-postcard__stamp">同心</span></div>
+                <blockquote>「我的梦想是宇航员。」</blockquote>
+                <figcaption>—— 来自：张家川县青少年 · 宣讲现场</figcaption>
+                <div class="mail-postcard__line"></div>
+              </figure>
+              <figure class="mail-postcard">
+                <div class="mail-postcard__head"><span>石榴信箱 · 02</span><span class="mail-postcard__stamp">石榴</span></div>
+                <blockquote>「我没有苦恼的事，要每天做开开心心的自己。」</blockquote>
+                <figcaption>—— 来自：张家川县青少年 · 宣讲现场</figcaption>
+                <div class="mail-postcard__line"></div>
+              </figure>
+              <figure class="mail-postcard">
+                <div class="mail-postcard__head"><span>石榴信箱 · 03</span><span class="mail-postcard__stamp">共铸</span></div>
+                <blockquote>「最喜欢龙，因为龙特别霸气！」</blockquote>
+                <figcaption>—— 来自：张家川县青少年 · 宣讲现场</figcaption>
+                <div class="mail-postcard__line"></div>
+              </figure>
+            </div>
+
+            <form class="mailbox-form" data-mailbox-form data-reveal>
+              <p class="mailbox-form__eyebrow">Write back · 写一张明信片</p>
+              <div class="mailbox-form__field">
+                <label for="mailboxName">来自谁</label>
+                <input id="mailboxName" name="name" type="text" maxlength="20" autocomplete="nickname" placeholder="填写姓名或昵称">
+              </div>
+              <div class="mailbox-form__field">
+                <label for="mailboxMessage">如果给未来的自己，或给远方的一位朋友写一句话，你会写什么？</label>
+                <textarea id="mailboxMessage" name="message" maxlength="88" rows="4" placeholder="例如：愿我们像石榴籽一样，紧紧抱在一起。"></textarea>
+              </div>
+              <div class="mailbox-form__foot">
+                <span data-mailbox-count>0 / 88</span>
+                <button class="btn btn--zhu" type="submit">投入石榴信箱</button>
+              </div>
+              <p class="mailbox-form__note" data-mailbox-note aria-live="polite">写下名字与心愿后，会生成一张保存在本机的白色明信片；点击卡片右上角的删除按钮，可同时从页面和本机记录中移除。</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- f 传播矩阵 -->
+      <section class="result-item result-item--matrix" id="result-matrix" aria-labelledby="matrix-title">
+        <header class="result-item__head" data-reveal>
+          <span class="result-letter">f</span>
+          <div>
+            <p class="result-kicker">Communication Matrix</p>
+            <h4 id="matrix-title">传播矩阵 · 让六骏故事抵达更远的地方</h4>
+          </div>
+          <div class="result-tags"><span>公众号 8 篇</span><span>短视频 3 条</span><span>多平台报道</span></div>
+        </header>
+        <p class="result-item__lead" data-reveal>搭建跨平台新媒体传播矩阵，以图文、短视频与媒体外宣共同讲述昭陵六骏、中华民族共同体理念与实践团故事。</p>
+
+        <div class="grid grid--4 matrix-grid" data-reveal>
+          <div class="card card--hover matrix-card">
+            <img src="assets/img/qr-wechat.webp" alt="马上同心社会实践团微信公众号二维码" loading="lazy">
+            <h4 class="card__title">微信公众号</h4>
+            <p class="card__text">以青年实践为笔，深挖马文化中的民族交往交流交融历史，发布团队实践推文 8 篇。</p>
+          </div>
+          <div class="card card--hover matrix-card">
+            <img src="assets/img/qr-xhs.webp" alt="马上同心社会实践团小红书账号二维码" loading="lazy">
+            <h4 class="card__title">小红书</h4>
+            <p class="card__text">以图文与短视频记录实践日常，让六骏故事以更轻盈的方式抵达年轻读者。</p>
+          </div>
+          <div class="card card--hover matrix-card">
+            <img src="assets/img/qr-douyin.webp" alt="马上同心社会实践团抖音号二维码" loading="lazy">
+            <h4 class="card__title">抖音</h4>
+            <p class="card__text">以短视频记录宣讲现场与实践日常，发布视频 3 条，累计播放量 15000 余次。</p>
+          </div>
+          <div class="card card--hover matrix-card matrix-card--media">
+            <div class="matrix-card__icon" aria-hidden="true">媒</div>
+            <h4 class="card__title">融媒报道</h4>
+            <p class="card__text">中国教育报网、中央民族大学新闻网、共青团张家川县委等平台报道与转载，让实践被更多人看见。</p>
+          </div>
+        </div>
+
+        <div class="card card--jin media-panel" data-reveal>
+          <h4 class="card__title">媒体外宣</h4>
+          <ul class="media-list">
+            <li><a href="https://news.muc.edu.cn/info/1327/68744.htm" target="_blank" rel="noopener"><b>中央民族大学新闻网报道</b><span>马上同心实践团暑期社会实践 · 从故宫到张家川的文化信使之旅</span><em>news.muc.edu.cn ↗</em></a></li>
+            <li><a href="http://www.jzqz.com.cn/edu/20260815958.html" target="_blank" rel="noopener"><b>中国教育报网</b><span>《骏马传薪，文润同心——中央民族大学教育学院「马上同心」实践队从故宫到张家川的文化信使之旅》</span><em>jzqz.com.cn ↗</em></a></li>
+            <li><a href="https://mp.weixin.qq.com/s/CiXRHBVleZjSwuYOTvEnDA" target="_blank" rel="noopener"><b>共青团张家川县委</b><span>张家川团县委报道实践团「三交史」宣讲与拼图课堂活动</span><em>微信公众号 ↗</em></a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 总结展望 ==================== -->
+<section class="section section--tint outlook-section" id="outlook">
+  <div class="container">
+    <div class="section__head" data-reveal>
+      <p class="eyebrow">Outlook</p>
+      <h2 class="section__title">总结<em>展望</em></h2>
+      <p class="section__lead">骏途收官，同心致远。把这一程的回望、优势与未来，写进同一张纸。</p>
+    </div>
+
+    <article class="outlook-sheet" data-reveal>
+      <div class="outlook-sheet__mark" aria-hidden="true">同</div>
+      <header class="outlook-sheet__head">
+        <p>回望 · 优势 · 展望</p>
+        <h3>把一次出发，走成一条可持续的文化传播路径</h3>
+        <p class="outlook-sheet__lead">从故宫展厅到张家川的广场与课堂，我们沿着一条关于马的文化线索向西而行，也让「铸牢中华民族共同体意识」落进一次次真实相遇。</p>
+      </header>
+
+      <div class="outlook-sheet__block">
+        <span class="outlook-sheet__no">01 / 回望</span>
+        <p>这一程，我们在绘画、石刻与考古遗存之间，读懂六骏名字里的多语回声，也看见一辆战国马车里中原、草原与西域工艺的交汇。九名青年把学术语言转译为孩子听得懂的故事，把文物知识转化为微课、游戏、拼图、书信与影像。那些在展柜前驻足的瞬间、在广场上亮起的灯、在课堂里举起的手，共同回答了「文化信使」为何出发。</p>
+      </div>
+
+      <div class="outlook-sheet__block">
+        <span class="outlook-sheet__no">02 / 优势</span>
+        <p>项目的价值，不止于完成了若干件作品，更在于磨出了一条可复制的协同育人路径：<strong>以国家战略为方向，以馆校协同为支点，以青年转化为方法，以边疆青少年的真实参与为落点。</strong>故宫的学术资源、学校的教育专业、地方的在地文化由此彼此抵达；微课、IP、文创、游戏与影像互相支撑，让成果既有研究的深度，也有传播的温度。「故宫+边疆+青年」不再只是一句模式概括，而成为有内容、有反馈、有温度的实践现场。</p>
+      </div>
+
+      <div class="outlook-sheet__block">
+        <span class="outlook-sheet__no">03 / 展望</span>
+        <p>骏途收官，同心致远。未来，我们将继续深化文物活化，构建持续性文化传播体系；拓展馆校合作，打磨可复制的课程与活动模式；创新数字表达，提升青少年的参与感与获得感；加强田野调查，建立文化传播的反馈机制；推动成果转化，让文化传承从一次暑期实践走向长期陪伴。愿更多孩子在认识家乡、认识中华文化的过程中，成为中华民族共同体的讲述者与行动者。</p>
+      </div>
+
+      <blockquote class="outlook-sheet__quote">从故宫到张家川，马的故事仍在继续；文化信使，也仍在路上。</blockquote>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer footer--light">
+  <div class="container">
+    <div class="footer__light-grid">
+      <div class="footer__brandcol">
+        <img class="footer__wordmark" src="assets/img/nav-logo.png" alt="马上同心社会实践团" loading="lazy">
+        <p class="footer__en">United Hearts Galloping Steeds Social Practice Team</p>
+        <div class="footer__navrow">
+          <b>【栏目导航】</b>
+          <a href="#top">首页</a><span>｜</span><a href="#overview">内容概览</a><span>｜</span><a href="#team">团队概览</a><span>｜</span><a href="#background">实践背景</a><span>｜</span><a href="#culture">文化溯源</a><span>｜</span><a href="#achievement">成果展示</a><span>｜</span><a href="#outlook">总结展望</a>
+        </div>
+        <p class="footer__copy">Copyright © 2026 马上同心社会实践团 All Rights Reserved</p>
+        <button class="sfx-toggle" id="sfxToggle" type="button" aria-pressed="true">
+          <span class="sfx-toggle__ico" aria-hidden="true">♪</span>
+          <span class="sfx-toggle__txt">音效已开启</span>
+        </button>
+      </div>
+      <div class="footer__qrcol">
+        <b class="footer__qr-title">【对外渠道】</b>
+        <div class="footer__qr footer__qr--light">
+          <figure>
+            <img src="assets/img/qr-wechat.webp" alt="「马上同心」微信公众号二维码" loading="lazy">
+            <figcaption>微信公众号<br>gh_b8c1f7fd82a4</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/qr-xhs.webp" alt="「马上同心」小红书二维码" loading="lazy">
+            <figcaption>小红书<br>49622277820</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/qr-douyin.webp" alt="「马上同心」抖音号二维码" loading="lazy">
+            <figcaption>抖音<br>53866160942</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <img class="footer__palace" src="assets/img/footer-palace.webp?v=20261022" alt="" aria-hidden="true" loading="lazy">
+  </div>
+</footer>
+
+<button class="bgm" id="bgmToggle" type="button" aria-pressed="false" aria-label="背景音乐《古道尘远》" title="背景音乐《古道尘远》">
+  <span class="bgm__ico" aria-hidden="true">♪</span>
+  <span class="bgm__txt">背景音乐</span>
+</button>
+
+<button class="totop" id="toTop" aria-label="回到顶部">↑</button>
+
+<!-- ==================== 弹窗 / 灯箱 ==================== -->
+<div class="modal" id="horseModal" role="dialog" aria-modal="true" aria-labelledby="hmName">
+  <div class="modal__box">
+    <button class="modal__close" data-close aria-label="关闭">×</button>
+    <div class="modal__hero" id="hmHero">
+      <img class="modal__art" id="hmArt" alt="">
+      <div class="modal__herotxt">
+        <p class="modal__side" id="hmSide"></p>
+        <h3 class="modal__name" id="hmName"></h3>
+        <p class="modal__praise" id="hmPraise"></p>
+      </div>
+    </div>
+    <div class="modal__body">
+      <dl class="modal__attrs">
+        <div class="attr"><dt>石刻位置</dt><dd id="hmPos"></dd></div>
+        <div class="attr"><dt>原生毛色</dt><dd id="hmColor"></dd></div>
+        <div class="attr"><dt>战伤 / 姿态</dt><dd id="hmWound"></dd></div>
+        <div class="attr"><dt>自然元素</dt><dd id="hmElem"></dd></div>
+        <div class="attr"><dt>共同体精神</dt><dd id="hmSpirit"></dd></div>
+      </dl>
+      <div id="hmExtra"></div>
+      <div class="modal__nav">
+        <button class="btn btn--line btn--sm" data-horse-prev>← 上一骏</button>
+        <button class="btn btn--line btn--sm" data-horse-next>下一骏 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片查看">
+  <button class="lightbox__close" data-close aria-label="关闭">×</button>
+  <button class="lightbox__nav lightbox__nav--prev" data-lb-prev aria-label="上一张">‹</button>
+  <img id="lbImg" alt="">
+  <p class="lightbox__cap" id="lbCap"></p>
+  <button class="lightbox__nav lightbox__nav--next" data-lb-next aria-label="下一张">›</button>
+</div>
+
+<div class="modal" id="memberModal" role="dialog" aria-modal="true" aria-labelledby="mmName">
+  <div class="modal__box modal__box--poster">
+    <button class="modal__close" data-close aria-label="关闭">×</button>
+    <div class="member-poster"><img id="mmPoster" alt=""></div>
+    <div class="member-bar">
+      <div class="member-bar__id">
+        <b id="mmName"></b>
+        <span id="mmGroup"></span>
+      </div>
+      <div class="member-bar__nav">
+        <button class="mnbtn" data-member-prev aria-label="上一位成员">‹</button>
+        <span id="mmIndex" aria-live="polite"></span>
+        <button class="mnbtn" data-member-next aria-label="下一位成员">›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-label="视频播放">
+  <div class="modal__box" style="width:min(1080px,100%);background:#000">
+    <button class="modal__close" data-close aria-label="关闭">×</button>
+    <video id="videoPlayer" controls playsinline preload="none" style="width:100%;display:block;border-radius:var(--radius)"></video>
+  </div>
+</div>
+
+
+<!-- ==================== 路线站点详情弹窗 ==================== -->
+<dialog class="route-dialog" id="routeDialog" aria-labelledby="routeDialogTitle">
+  <button class="route-dialog__close" type="button" data-route-close aria-label="关闭站点详情">×</button>
+  <div class="route-dialog__hero">
+    <p class="route-dialog__eyebrow">PRACTICE ROUTE · 站点详情</p>
+    <span class="route-dialog__index" id="routeDialogIndex">01 / 04</span>
+    <h3 class="route-dialog__title" id="routeDialogTitle">北京 · 中央民族大学</h3>
+    <p class="route-dialog__sub" id="routeDialogSub">文化信使 · 出发</p>
+  </div>
+  <div class="route-dialog__body">
+    <p class="route-dialog__lead" id="routeDialogLead"></p>
+    <div class="route-dialog__facts" id="routeDialogFacts"></div>
+    <div id="routeDialogActions"></div>
+    <blockquote class="route-dialog__quote" id="routeDialogQuote"></blockquote>
+    <div class="route-dialog__footer">
+      <span>自东向西 · <b>一条红线，千里同心</b></span>
+      <button class="btn btn--line btn--sm" type="button" data-route-close>收起详情</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="assets/js/main.js?v=20261020"></script>
+<script src="assets/js/enhancements.js?v=20261022c"></script>
+</body>
+</html>
