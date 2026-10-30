@@ -1,0 +1,11 @@
+# 本地修订备份
+backup-revision/
+*.bak
+
+# 原始素材包（网站已使用压缩后的 WebP/MP4，不把原始大文件重复上传）
+assets/img/网页所需图片素材/
+
+# 系统临时文件
+Thumbs.db
+Desktop.ini
+.DS_Store
